@@ -20,5 +20,5 @@ The following example illustrates how the package can be used.
 
 ## Reporting Issues
 If you think that you have found an issue in the package, please use 
-[the package issue tracker](https://github.com/persiantex/xepersian/issues) 
+[the package issue tracker](https://github.com/tex-persian/xepersian/issues) 
 to report it.
