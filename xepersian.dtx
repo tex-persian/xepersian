@@ -5812,7 +5812,7 @@ indexblock environment may only appear inside frontpage environment.
 %    \begin{macrocode}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{xepersian-mathsdigitspec}
-  [2018/12/16 v1.1.7 Unicode Persian maths digits in XeLaTeX]
+  [2022/02/01 v1.1.8 Unicode Persian maths digits in XeLaTeX]
 \def\new@mathgroup{\alloc@8\mathgroup\chardef\@cclvi}
 \let\newfam\new@mathgroup
 \def\select@group#1#2#3#4{%
@@ -5898,9 +5898,10 @@ indexblock environment may only appear inside frontpage environment.
 \cs_new_eq:NN \orig_mathrm:n \mathrm
 \cs_new_eq:NN \orig_mathsf:n \mathsf
 \cs_new_eq:NN \orig_mathtt:n \mathtt
+%\int_const:Nn \c_one_int { 1 }
 \NewDocumentCommand \new@mathbf { m } {
  \orig_mathbf:n {
-   \int_step_inline:nnnn { `0 } { \c_one } { `9 } {
+   \int_step_inline:nnnn { `0 } { \c_one_int } { `9 } {
      \mathcode ##1 = \numexpr "100 * \symnew@mathbf@font@digits + ##1 \relax
    }
    #1
@@ -5908,7 +5909,7 @@ indexblock environment may only appear inside frontpage environment.
 }
 \NewDocumentCommand \new@mathit { m } {
  \orig_mathit:n {
-   \int_step_inline:nnnn { `0 } { \c_one } { `9 } {
+   \int_step_inline:nnnn { `0 } { \c_one_int } { `9 } {
      \mathcode ##1 = \numexpr "100 * \symnew@mathit@font@digits + ##1 \relax
    }
    #1
@@ -5916,7 +5917,7 @@ indexblock environment may only appear inside frontpage environment.
 }
 \NewDocumentCommand \new@mathrm { m } {
  \orig_mathrm:n {
-   \int_step_inline:nnnn { `0 } { \c_one } { `9 } {
+   \int_step_inline:nnnn { `0 } { \c_one_int } { `9 } {
      \mathcode ##1 = \numexpr "100 * \symnew@mathrm@font@digits + ##1 \relax
    }
    #1
@@ -5924,7 +5925,7 @@ indexblock environment may only appear inside frontpage environment.
 }
 \NewDocumentCommand \new@mathsf{ m } {
  \orig_mathsf:n {
-   \int_step_inline:nnnn { `0 } { \c_one } { `9 } {
+   \int_step_inline:nnnn { `0 } { \c_one_int } { `9 } {
      \mathcode ##1 = \numexpr "100 * \symnew@mathsf@font@digits + ##1 \relax
    }
    #1
@@ -5932,7 +5933,7 @@ indexblock environment may only appear inside frontpage environment.
 }
 \NewDocumentCommand \new@mathtt{ m } {
  \orig_mathtt:n {
-   \int_step_inline:nnnn { `0 } { \c_one } { `9 } {
+   \int_step_inline:nnnn { `0 } { \c_one_int } { `9 } {
      \mathcode ##1 = \numexpr "100 * \symnew@mathtt@font@digits + ##1 \relax
    }
    #1
@@ -5952,9 +5953,10 @@ indexblock environment may only appear inside frontpage environment.
  }
 \char_set_catcode_ignore:n {32}
 
+%\__kernel_primitive:NN \iffontchar            \tex_iffontchar:D
 \prg_new_conditional:Nnn \__xepersian_mathsdigitspec_primitive_font_char_if_exist:n {p,TF,T,F}
   {
-    \etex_iffontchar:D \l_fontspec_font "#1 \scan_stop:
+    \tex_iffontchar:D \l_fontspec_font "#1 \scan_stop:
       \prg_return_true:
     \else:
       \prg_return_false:
