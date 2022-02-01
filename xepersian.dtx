@@ -5,7 +5,7 @@
 %<*readme>
 ____________________
 The XePersian package
-v23.2
+v23.3
 
 The xepersian package provides a convenient interface for 
 typesetting Persian and English texts in LaTeX, using XeTeX 
@@ -22,7 +22,7 @@ In doing so, please always explain your issue well enough, and always
 include a minimal working example showing the issue.
   
 
-Current version release date: 2022/02/01
+Current version release date: 2022/02/27
 ___________________________________________
 Vafa Khalighi
 tex-persian@vafa.ac
@@ -158,7 +158,7 @@ by Vafa Khalighi.
 \documentclass{ltxdoc}
 \input{xepersian-doc-preamble.ltx}
 \hypersetup{%
-  pdftitle={Source documentation for version 23.2 of the XePersian
+  pdftitle={Source documentation for version 23.3 of the XePersian
                 package}%
 }
 \EnableCrossrefs
@@ -177,7 +177,7 @@ by Vafa Khalighi.
 % \GetFileInfo{\jobname.dtx}
 % \title{\textcolor{blue!65!black}{\Huge The \textsf{\XePersian} \textit{Package}}\\
 %\LARGE Persian for \LaTeXe, using {\XeTeX} engine\\[5pt]
-%\large Source documentation for \textcolor{blue!65!black}{version 23.2}}
+%\large Source documentation for \textcolor{blue!65!black}{version 23.3}}
 % \author{Vafa Khalighi\thanks{Thanks to the bidi-tex GitHub organization consisted of David Carlisle and other members of the  {\LaTeX} team to maintain the package in the period 2018--2020.}\\
 %  \url{tex-persian@vafa.ac}}
 %\setcounter{page}{0}
@@ -188,7 +188,7 @@ by Vafa Khalighi.
 %\textcolor{blue!65!black}{\Huge The \textsf{\XePersian} \textit{Package}}
 %
 %\Large
-%Source documentation for \textcolor{blue!65!black}{version 23.2}}
+%Source documentation for \textcolor{blue!65!black}{version 23.3}}
 %
 %\vskip 0pt plus 3fill
 %\textit{\large to my Master, \textbf{Ferdowsi The Great}}
@@ -204,6 +204,18 @@ by Vafa Khalighi.
 %\medskip
 %In doing so, please always explain your issue well enough, and always include
 %a minimal working example showing the issue. 
+%
+%\bigskip
+%You may also have conversations, ask questions and post answers
+%without opening issues using the Discussions space:
+%
+%\medskip
+%  \centerline{\url{https://github.com/tex-persian/xepersian/discussions}}
+%
+%\medskip
+% The announcements for the new releases of the package will
+%also appear in the Discussions space under the Announcements
+%category.
 %\end{minipage}
 %}}
 %
@@ -3423,8 +3435,8 @@ U+003E U+003E <> U+00BB ; >> -> RIGHT POINTING GUILLEMET
 % \section{File \texttt{xepersian.sty}}
 %    \begin{macrocode}
 \NeedsTeXFormat{LaTeX2e}
-\def\xepersian@version{23.2}
-\def\xepersiandate{2022/02/01}
+\def\xepersian@version{23.3}
+\def\xepersiandate{2022/02/27}
 \ProvidesPackage{xepersian}[\xepersiandate\space v\xepersian@version\space 
 Persian typesetting in XeLaTeX]
 \RequirePackage{fontspec}
@@ -3450,6 +3462,8 @@ Persian typesetting in XeLaTeX]
 * Location on CTAN: /macros/xetex/latex/xepersian^^J%
 * ^^J%
 * Issue tracker: https://github.com/tex-persian/xepersian/issues^^J%
+* ^^J%
+* Discussions: https://github.com/tex-persian/xepersian/discussions^^J%
 * ^^J%
 * Support Email: tex-persian@vafa.ac^^J%
 * ^^J%
@@ -4258,7 +4272,7 @@ Persian typesetting in XeLaTeX]
 
 \newcommand*{\@xepersian@pdfcustomproperties}{%
   This is the xepersian package, Version \xepersian@version,
-  Released February 1, 2022. 
+  Released February 27, 2022. 
 }
 
 \newcommand\twocolumnstableofcontents{%
