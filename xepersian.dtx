@@ -245,7 +245,7 @@ by Vafa Khalighi.
 %\iffalse
 %<*table>
 %\fi
-%% \CheckSum{10946}
+%% \CheckSum{10949}
 %% \CharacterTable
 %%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
 %%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
@@ -6173,8 +6173,9 @@ indexblock environment may only appear inside frontpage environment.
 
 \NewDocumentCommand \SwitchToDefaultMathDigits {  } {
   \int_step_inline:nnnn { `0 } { \c_one_int } { `9 } {
-    \mathcode ##1 = \numexpr "100 * \symoperators + ##1 \relax
+    \SetMathCode{##1}{\mathalpha}{operators}{##1}
   }
+  \SetMathCode{`\%}{\mathbin}{operators}{`\%}
   \tl_set_eq:NN \ZifferLeer \DefaultZifferLeer
   \tl_set_eq:NN \mathbf \orig_mathbf:n
   \tl_set_eq:NN \mathit \orig_mathit:n
@@ -6185,8 +6186,9 @@ indexblock environment may only appear inside frontpage environment.
 
 \NewDocumentCommand \SwitchToPersianMathDigits {  } {
   \int_step_inline:nnnn { `0 } { \c_one_int } { `9 } {
-    \mathcode ##1 = \numexpr "100 * \symOPERATORS + ##1 \relax
+    \SetMathCode{##1}{\mathalpha}{OPERATORS}{##1}
   }
+  \SetMathCode{`\%}{\mathbin}{OPERATORS}{`٪}
   \tl_set_eq:NN \ZifferLeer \orig_ZifferLeer
   \tl_set_eq:NN \mathbf \new@mathbf
   \tl_set_eq:NN \mathit \new@mathit
