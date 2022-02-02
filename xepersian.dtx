@@ -245,7 +245,7 @@ by Vafa Khalighi.
 %\iffalse
 %<*table>
 %\fi
-%% \CheckSum{10887}
+%% \CheckSum{10946}
 %% \CharacterTable
 %%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
 %%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
@@ -5844,7 +5844,7 @@ indexblock environment may only appear inside frontpage environment.
 %    \begin{macrocode}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{xepersian-mathsdigitspec}
-  [2022/02/01 v1.1.8 Unicode Persian maths digits in XeLaTeX]
+  [2022/02/27 v1.1.9 Unicode Persian maths digits in XeLaTeX]
 \def\new@mathgroup{\alloc@8\mathgroup\chardef\@cclvi}
 \let\newfam\new@mathgroup
 \def\select@group#1#2#3#4{%
@@ -6128,6 +6128,7 @@ indexblock environment may only appear inside frontpage environment.
  \fi}
 \mathcode`.="8000\relax
 \def\ZifferLeer{\ifx\decimalseparator\undefined .\else \decimalseparator\fi}
+\def\DefaultZifferLeer{.}
 \def\DefaultInlineMathsDigits{\def\SetInlineMathsDigits{}}
 \def\DefaultDisplayMathsDigits{\def\SetDisplayMathsDigits{}}
 \def\DefaultMathsDigits{%
@@ -6166,6 +6167,34 @@ indexblock environment may only appear inside frontpage environment.
   \the\everydisplay\SetDisplayMathsDigits%
   \let\SetInlineMathsDigits\relax%
 }
+
+\ExplSyntaxOn
+\cs_new_eq:NN \orig_ZifferLeer \ZifferLeer
+
+\NewDocumentCommand \SwitchToDefaultMathDigits {  } {
+  \int_step_inline:nnnn { `0 } { \c_one_int } { `9 } {
+    \mathcode ##1 = \numexpr "100 * \symoperators + ##1 \relax
+  }
+  \tl_set_eq:NN \ZifferLeer \DefaultZifferLeer
+  \tl_set_eq:NN \mathbf \orig_mathbf:n
+  \tl_set_eq:NN \mathit \orig_mathit:n
+  \tl_set_eq:NN \mathrm \orig_mathrm:n
+  \tl_set_eq:NN \mathsf \orig_mathsf:n
+  \tl_set_eq:NN \mathtt \orig_mathtt:n
+}
+
+\NewDocumentCommand \SwitchToPersianMathDigits {  } {
+  \int_step_inline:nnnn { `0 } { \c_one_int } { `9 } {
+    \mathcode ##1 = \numexpr "100 * \symOPERATORS + ##1 \relax
+  }
+  \tl_set_eq:NN \ZifferLeer \orig_ZifferLeer
+  \tl_set_eq:NN \mathbf \new@mathbf
+  \tl_set_eq:NN \mathit \new@mathit
+  \tl_set_eq:NN \mathrm \new@mathrm
+  \tl_set_eq:NN \mathsf \new@mathsf
+  \tl_set_eq:NN \mathtt \new@mathtt
+}
+\ExplSyntaxOff
 %    \end{macrocode}
 % \iffalse
 %</xepersian-mathsdigitspec.sty>
