@@ -142,7 +142,7 @@ by Vafa Khalighi.
 \generate{\file{varioref-xepersian.def}{\from{\jobname.dtx}{table,varioref-xepersian.def}}}
 \generate{\file{xepersian.sty}{\from{\jobname.dtx}{table,xepersian.sty}}}
 \generate{\file{xepersian-magazine.cls}{\from{\jobname.dtx}{table,xepersian-magazine.cls}}}
-\generate{\file{xepersian-mathsdigitspec.sty}{\from{\jobname.dtx}{table,xepersian-mathsdigitspec.sty}}}
+\generate{\file{xepersian-mathdigitspec.sty}{\from{\jobname.dtx}{table,xepersian-mathdigitspec.sty}}}
 \generate{\file{xepersian-multiplechoice.sty}{\from{\jobname.dtx}{table,xepersian-multiplechoice.sty}}}
 \generate{\file{xepersian-persiancal.sty}{\from{\jobname.dtx}{table,xepersian-persiancal.sty}}}
 %</batchfile>
@@ -1533,8 +1533,8 @@ by Vafa Khalighi.
 %    \begin{macrocode}
 \ProvidesFile{xepersian-localise-commands-xepersian.def}[2012/07/25 v0.2 Persian localisation of XePersian commands]
 \eqcommand{خط‌زیرنویس‌خودکار}{autofootnoterule}
-\eqcommand{اعدادفرمولهاخودکار}{AutoMathsDigits}
-\eqcommand{اعدادفرمولهالاتین}{DefaultMathsDigits}
+\eqcommand{اعدادفرمولهاخودکار}{AutoMathDigits}
+\eqcommand{اعدادفرمولهالاتین}{DefaultMathDigits}
 \eqcommand{معادل@کلید}{keyval@eq@alias@key}
 \eqcommand{تعریف‌قلم‌لاتین}{deflatinfont}
 \eqcommand{تعریف‌قلم‌پارسی}{defpersianfont}
@@ -1552,7 +1552,7 @@ by Vafa Khalighi.
 \eqcommand{پانویس‌عنوان}{LTRthanks}
 \eqcommand{روزپارسی}{persianday}
 \eqcommand{قلم‌پارسی}{persianfont}
-\eqcommand{اعدادفرمولهاپارسی}{PersianMathsDigits}
+\eqcommand{اعدادفرمولهاپارسی}{PersianMathDigits}
 \eqcommand{ماه‌پارسی}{persianmonth}
 \eqcommand{سال‌پارسی}{persianyear}
 \eqcommand{علامت‌چپ‌نقل‌قول‌پارسی}{plq}
@@ -3450,7 +3450,7 @@ U+003E U+003E <> U+00BB ; >> -> RIGHT POINTING GUILLEMET
 Persian typesetting in XeLaTeX]
 \RequirePackage{fontspec}
 \RequirePackage{xepersian-persiancal}
-\RequirePackage{xepersian-mathsdigitspec}
+\RequirePackage{xepersian-mathdigitspec}
 \RequirePackage{bidi}
 \edef\@xepersian@info{****************************************************^^J%
 * ^^J%
@@ -4655,27 +4655,27 @@ number is 999,999,999.}%
 
 \define@choicekey{xepersian.sty}{mathdigits}[\xepersian@tempa\xepersian@tempb]{automatic,default,persian}{%
   \ifcase\xepersian@tempb\relax
-    \AutoMathsDigits
+    \AutoMathDigits
   \or
-    \DefaultMathsDigits
+    \DefaultMathDigits
   \or
-    \PersianMathsDigits
+    \PersianMathDigits
   \fi}
 \define@choicekey{xepersian.sty}{inlinemathdigits}[\xepersian@tempa\xepersian@tempb]{automatic,default,persian}{%
   \ifcase\xepersian@tempb\relax
-    \AutoInlineMathsDigits
+    \AutoInlineMathDigits
   \or
-    \DefaultInlineMathsDigits
+    \DefaultInlineMathDigits
   \or
-    \PersianInlineMathsDigits
+    \PersianInlineMathDigits
   \fi}
 \define@choicekey{xepersian.sty}{displaymathdigits}[\xepersian@tempa\xepersian@tempb]{automatic,default,persian}{%
   \ifcase\xepersian@tempb\relax
-    \AutoDisplayMathsDigits
+    \AutoDisplayMathDigits
   \or
-    \DefaultDisplayMathsDigits
+    \DefaultDisplayMathDigits
   \or
-    \PersianDisplayMathsDigits
+    \PersianDisplayMathDigits
   \fi}
 \define@choicekey{xepersian.sty}{RTLdocument}[\xepersian@tempa\xepersian@tempb]{on,off}[on]{%
   \ifcase\xepersian@tempb\relax
@@ -5838,13 +5838,13 @@ indexblock environment may only appear inside frontpage environment.
 %    \end{macrocode}
 % \iffalse
 %</xepersian-magazine.cls>
-%<*xepersian-mathsdigitspec.sty>
+%<*xepersian-mathdigitspec.sty>
 %\fi
-% \section{File \texttt{xepersian-mathsdigitspec.sty}}
+% \section{File \texttt{xepersian-mathdigitspec.sty}}
 %    \begin{macrocode}
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{xepersian-mathsdigitspec}
-  [2022/02/27 v1.1.9 Unicode Persian maths digits in XeLaTeX]
+\ProvidesPackage{xepersian-mathdigitspec}
+  [2022/02/27 v1.1.9 Unicode Persian math digits in XeLaTeX]
 \def\new@mathgroup{\alloc@8\mathgroup\chardef\@cclvi}
 \let\newfam\new@mathgroup
 \def\select@group#1#2#3#4{%
@@ -5919,7 +5919,7 @@ indexblock environment may only appear inside frontpage environment.
   \tl_remove_once:Nn \@preamblecmds {\do#1}
  }
 \ExplSyntaxOff
-\newcommand\xepersian@PackageInfo[1]{\PackageInfo{xepersian-mathsdigitspec}{#1}}
+\newcommand\xepersian@PackageInfo[1]{\PackageInfo{xepersian-mathdigitspec}{#1}}
 \newcommand\SetMathCode[4]{%
   \Umathcode#1="\mathchar@type#2 \csname sym#3\endcsname #4\relax}
 \newcommand\SetMathCharDef[4]{%
@@ -5972,11 +5972,11 @@ indexblock environment may only appear inside frontpage environment.
  }
 }
 
-\cs_new:Npn \__xepersian_mathsdigitspec_error:nxx    { \msg_error:nnxx    {xepersian-mathsdigitspec} }
-\cs_new:Nn \__xepersian_mathsdigitspec_msg_new:nnnn
+\cs_new:Npn \__xepersian_mathdigitspec_error:nxx    { \msg_error:nnxx    {xepersian-mathdigitspec} }
+\cs_new:Nn \__xepersian_mathdigitspec_msg_new:nnnn
   { \msg_new:nnxx {#1} {#2} { \tl_trim_spaces:n {#3} } { \tl_trim_spaces:n {#4} } }
 \char_set_catcode_space:n {32}
-\__xepersian_mathsdigitspec_msg_new:nnnn {xepersian-mathsdigitspec} {char-not-exist}
+\__xepersian_mathdigitspec_msg_new:nnnn {xepersian-mathdigitspec} {char-not-exist}
  {
   The font "#1" does not contain U+#2.
  }
@@ -5986,7 +5986,7 @@ indexblock environment may only appear inside frontpage environment.
 \char_set_catcode_ignore:n {32}
 
 %\__kernel_primitive:NN \iffontchar            \tex_iffontchar:D
-\prg_new_conditional:Nnn \__xepersian_mathsdigitspec_primitive_font_char_if_exist:n {p,TF,T,F}
+\prg_new_conditional:Nnn \__xepersian_mathdigitspec_primitive_font_char_if_exist:n {p,TF,T,F}
   {
     \tex_iffontchar:D \l_fontspec_font "#1 \scan_stop:
       \prg_return_true:
@@ -5995,35 +5995,35 @@ indexblock environment may only appear inside frontpage environment.
     \fi:
   }
   
-\clist_new:N \l_xepersian_mathsdigitspec_char_clist
+\clist_new:N \l_xepersian_mathdigitspec_char_clist
 
-\cs_new:Nn \__xepersian_mathsdigitspec_char_set_not_exist_error:nn
+\cs_new:Nn \__xepersian_mathdigitspec_char_set_not_exist_error:nn
  {
-    \clist_set:Nn \l_xepersian_mathsdigitspec_char_clist { #1 }
-    \clist_map_inline:Nn \l_xepersian_mathsdigitspec_char_clist {
-      \__xepersian_mathsdigitspec_primitive_font_char_if_exist:nF { ##1 }{ \__xepersian_mathsdigitspec_error:nxx {char-not-exist} { #2 } { ##1 } }
+    \clist_set:Nn \l_xepersian_mathdigitspec_char_clist { #1 }
+    \clist_map_inline:Nn \l_xepersian_mathdigitspec_char_clist {
+      \__xepersian_mathdigitspec_primitive_font_char_if_exist:nF { ##1 }{ \__xepersian_mathdigitspec_error:nxx {char-not-exist} { #2 } { ##1 } }
     }
  }
  
-\cs_new:Nn \__xepersian_mathsdigitspec_char_prepend_not_exist_error:nn
+\cs_new:Nn \__xepersian_mathdigitspec_char_prepend_not_exist_error:nn
  {
-    \clist_put_left:Nn \l_xepersian_mathsdigitspec_char_clist { #1 }
-    \clist_map_inline:Nn \l_xepersian_mathsdigitspec_char_clist {
-      \__xepersian_mathsdigitspec_primitive_font_char_if_exist:nF { ##1 }{ \__xepersian_mathsdigitspec_error:nxx {char-not-exist} { #2 } { ##1 } }
+    \clist_put_left:Nn \l_xepersian_mathdigitspec_char_clist { #1 }
+    \clist_map_inline:Nn \l_xepersian_mathdigitspec_char_clist {
+      \__xepersian_mathdigitspec_primitive_font_char_if_exist:nF { ##1 }{ \__xepersian_mathdigitspec_error:nxx {char-not-exist} { #2 } { ##1 } }
     }
  }
  
-\cs_new:Nn \__xepersian_mathsdigitspec_char_append_not_exist_error:nn
+\cs_new:Nn \__xepersian_mathdigitspec_char_append_not_exist_error:nn
  {
-    \clist_put_right:Nn \l_xepersian_mathsdigitspec_char_clist { #1 }
-    \clist_map_inline:Nn \l_xepersian_mathsdigitspec_char_clist {
-      \__xepersian_mathsdigitspec_primitive_font_char_if_exist:nF { ##1 }{ \__xepersian_mathsdigitspec_error:nxx {char-not-exist} { #2 } { ##1 } }
+    \clist_put_right:Nn \l_xepersian_mathdigitspec_char_clist { #1 }
+    \clist_map_inline:Nn \l_xepersian_mathdigitspec_char_clist {
+      \__xepersian_mathdigitspec_primitive_font_char_if_exist:nF { ##1 }{ \__xepersian_mathdigitspec_error:nxx {char-not-exist} { #2 } { ##1 } }
     }
  } 
   
-\cs_new:Nn \__xepersian_mathsdigitspec_char_not_exist_error:n
+\cs_new:Nn \__xepersian_mathdigitspec_char_not_exist_error:n
  {
-    \__xepersian_mathsdigitspec_char_set_not_exist_error:nn { 
+    \__xepersian_mathdigitspec_char_set_not_exist_error:nn { 
       06F0 , 06F1 , 06F2 , 06F3 , 06F4 , 06F5 , 06F6 , 06F7 , 06F8 ,
       06F9 , 066A , 066B
     } { #1 }                         
@@ -6038,13 +6038,13 @@ indexblock environment may only appear inside frontpage environment.
   \let\glb@currsize\relax
   \fontspec_set_family:Nnn \g__xepersian_mathdigitsfamily_tl {Ligatures=PersianTeX,#1} {#2}
   \__xepersian_setmathdigitfont_hook:nn {#1} {#2}
-    \xepersian@PackageInfo{Defining the default Persian maths digits font as '#2'}
+    \xepersian@PackageInfo{Defining the default Persian math digits font as '#2'}
   \DeclareSymbolFont{OPERATORS}   {\g_fontspec_encoding_tl}{\g__xepersian_mathdigitsfamily_tl} {m}{n}
   \DeclareSymbolFont{new@mathbf@font@digits}{\g_fontspec_encoding_tl}{\g__xepersian_mathdigitsfamily_tl}{bx}{n}
   \DeclareSymbolFont{new@mathit@font@digits}{\g_fontspec_encoding_tl}{\g__xepersian_mathdigitsfamily_tl}{m}{it}
   \DeclareSymbolFont{new@mathrm@font@digits}{\g_fontspec_encoding_tl}{\g__xepersian_mathdigitsfamily_tl}{m}{n}
-  \__xepersian_mathsdigitspec_char_not_exist_error:n { #2 }
-  \def\persianmathsdigits{%
+  \__xepersian_mathdigitspec_char_not_exist_error:n { #2 }
+  \def\persianmathdigits{%
   \SetMathCode{`0}{\mathalpha}{OPERATORS}{`0}
   \SetMathCode{`1}{\mathalpha}{OPERATORS}{`1}
   \SetMathCode{`2}{\mathalpha}{OPERATORS}{`2}
@@ -6073,7 +6073,7 @@ indexblock environment may only appear inside frontpage environment.
   \fontspec_set_family:Nnn \g__xepersian_mathsfdigitfamily_tl {Ligatures=PersianTeX,#1} {#2}
   \__xepersian_setmathsfdigitfont_hook:nn {#1} {#2}
       \DeclareSymbolFont{new@mathsf@font@digits}{\g_fontspec_encoding_tl}{\g__xepersian_mathsfdigitfamily_tl}{m}{n}
-      \__xepersian_mathsdigitspec_char_not_exist_error:n { #2 }
+      \__xepersian_mathdigitspec_char_not_exist_error:n { #2 }
     \def\persianmathsfdigits{\tl_set_eq:NN \mathsf \new@mathsf}
  }
 
@@ -6088,7 +6088,7 @@ indexblock environment may only appear inside frontpage environment.
   \fontspec_set_family:Nnn \g__xepersian_mathttdigitfamily_tl {Ligatures=PersianTeX,#1} {#2}
   \__xepersian_setmathttdigitfont_hook:nn {#1} {#2}
       \DeclareSymbolFont{new@mathtt@font@digits}{\g_fontspec_encoding_tl}{\g__xepersian_mathttdigitfamily_tl}{m}{n}
-      \__xepersian_mathsdigitspec_char_not_exist_error:n { #2 }
+      \__xepersian_mathdigitspec_char_not_exist_error:n { #2 }
     \def\persianmathttdigits{\tl_set_eq:NN \mathtt \new@mathtt}
  }
 
@@ -6129,43 +6129,43 @@ indexblock environment may only appear inside frontpage environment.
 \mathcode`.="8000\relax
 \def\ZifferLeer{\ifx\decimalseparator\undefined .\else \decimalseparator\fi}
 \def\DefaultZifferLeer{.}
-\def\DefaultInlineMathsDigits{\def\SetInlineMathsDigits{}}
-\def\DefaultDisplayMathsDigits{\def\SetDisplayMathsDigits{}}
-\def\DefaultMathsDigits{%
-  \DefaultInlineMathsDigits%
-  \DefaultDisplayMathsDigits%
+\def\DefaultInlineMathDigits{\def\SetInlineMathDigits{}}
+\def\DefaultDisplayMathDigits{\def\SetDisplayMathDigits{}}
+\def\DefaultMathDigits{%
+  \DefaultInlineMathDigits%
+  \DefaultDisplayMathDigits%
 }
-\def\PersianInlineMathsDigits{\def\SetInlineMathsDigits{%
-\ifx\persianmathsdigits\undefined\else\persianmathsdigits\fi%
+\def\PersianInlineMathDigits{\def\SetInlineMathDigits{%
+\ifx\persianmathdigits\undefined\else\persianmathdigits\fi%
 \ifx\persianmathsfdigits\undefined\else\persianmathsfdigits\fi%
 \ifx\persianmathttdigits\undefined\else\persianmathttdigits\fi}}
-\def\PersianDisplayMathsDigits{\def\SetDisplayMathsDigits{%
-\ifx\persianmathsdigits\undefined\else\persianmathsdigits\fi%
+\def\PersianDisplayMathDigits{\def\SetDisplayMathDigits{%
+\ifx\persianmathdigits\undefined\else\persianmathdigits\fi%
 \ifx\persianmathsfdigits\undefined\else\persianmathsfdigits\fi%
 \ifx\persianmathttdigits\undefined\else\persianmathttdigits\fi}}
-\def\PersianMathsDigits{%
-  \PersianInlineMathsDigits%
-  \PersianDisplayMathsDigits%
+\def\PersianMathDigits{%
+  \PersianInlineMathDigits%
+  \PersianDisplayMathDigits%
 }
-\def\AutoInlineMathsDigits{\def\SetInlineMathsDigits{%
-\ifx\persianmathsdigits\undefined\else\if@nonlatin\persianmathsdigits\fi\fi%
+\def\AutoInlineMathDigits{\def\SetInlineMathDigits{%
+\ifx\persianmathdigits\undefined\else\if@nonlatin\persianmathdigits\fi\fi%
 \ifx\persianmathsfdigits\undefined\else\if@nonlatin\persianmathsfdigits\fi\fi%
 \ifx\persianmathttdigits\undefined\else\if@nonlatin\persianmathttdigits\fi\fi}}
-\def\AutoDisplayMathsDigits{\def\SetDisplayMathsDigits{%
-\ifx\persianmathsdigits\undefined\else\if@nonlatin\persianmathsdigits\fi\fi%
+\def\AutoDisplayMathDigits{\def\SetDisplayMathDigits{%
+\ifx\persianmathdigits\undefined\else\if@nonlatin\persianmathdigits\fi\fi%
 \ifx\persianmathsfdigits\undefined\else\if@nonlatin\persianmathsfdigits\fi\fi%
 \ifx\persianmathttdigits\undefined\else\if@nonlatin\persianmathttdigits\fi\fi}}
-\def\AutoMathsDigits{%
-  \AutoInlineMathsDigits%
-  \AutoDisplayMathsDigits%
+\def\AutoMathDigits{%
+  \AutoInlineMathDigits%
+  \AutoDisplayMathDigits%
 }
-\AutoMathsDigits
-\everymath\expandafter{\the\everymath\SetInlineMathsDigits%
-  \let\SetDisplayMathsDigits\relax%
+\AutoMathDigits
+\everymath\expandafter{\the\everymath\SetInlineMathDigits%
+  \let\SetDisplayMathDigits\relax%
 }
 \everydisplay\expandafter{%
-  \the\everydisplay\SetDisplayMathsDigits%
-  \let\SetInlineMathsDigits\relax%
+  \the\everydisplay\SetDisplayMathDigits%
+  \let\SetInlineMathDigits\relax%
 }
 
 \ExplSyntaxOn
@@ -6199,7 +6199,7 @@ indexblock environment may only appear inside frontpage environment.
 \ExplSyntaxOff
 %    \end{macrocode}
 % \iffalse
-%</xepersian-mathsdigitspec.sty>
+%</xepersian-mathdigitspec.sty>
 %<*xepersian-multiplechoice.sty>
 %\fi
 % \section{File \texttt{xepersian-multiplechoice.sty}}

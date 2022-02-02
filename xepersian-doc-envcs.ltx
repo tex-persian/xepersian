@@ -74,7 +74,7 @@
 \end{itemize}
 \subsection{Things To Know About \Lcs{setmathdigitfont}, \Lcs{setmathsfdigitfont}, and \Lcs{setmathttdigitfont}}
 \begin{BDef}
-\Lcs{DefaultMathsDigits}\quad\Lcs{PersianMathsDigits}\quad\Lcs{AutoMathsDigits}
+\Lcs{DefaultMathDigits}\quad\Lcs{PersianMathDigits}\quad\Lcs{AutoMathDigits}
 \end{BDef}
 \begin{itemize}
  \item As we discussed before, \Lcs{setmathdigitfont} will choose the Persian font for digits in math mode. By default, digits in math mode will appear in Persian form.
@@ -82,9 +82,9 @@
 
 If you use \Lcs{setmathdigitfont}, \Lcs{setmathsfdigitfont}, and \Lcs{setmathttdigitfont}, then  you should  know that:
 \begin{itemize}
-\item By default, \Lcs{AutoMathsDigits} is active, which means that in Persian mode, you get Persian digits in math mode and in Latin mode, you get \TeX's default font and digits in math mode.
-\item If you use \Lcs{PersianMathsDigits} anywhere, you will overwrite  \XePersian's default behaviour and you will always get Persian digits in math mode.
-\item If you use \Lcs{DefaultMathsDigits} anywhere, again you will overwrite \XePersian's default behaviour and you will always get \TeX's default font and digits in math mode.
+\item By default, \Lcs{AutoMathDigits} is active, which means that in Persian mode, you get Persian digits in math mode and in Latin mode, you get \TeX's default font and digits in math mode.
+\item If you use \Lcs{PersianMathDigits} anywhere, you will overwrite  \XePersian's default behaviour and you will always get Persian digits in math mode.
+\item If you use \Lcs{DefaultMathDigits} anywhere, again you will overwrite \XePersian's default behaviour and you will always get \TeX's default font and digits in math mode.
 \end{itemize}
 \end{itemize}
 \end{document}
