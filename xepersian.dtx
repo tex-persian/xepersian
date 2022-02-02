@@ -126,6 +126,7 @@ by Vafa Khalighi.
 }
 \usepostamble\mapping@postamble
 \generate{\file{persian-tex-text.map}{\from{\jobname.dtx}{persian-tex-text.map}}}
+\generate{\file{persian-tex-text-nonumbers.map}{\from{\jobname.dtx}{persian-tex-text-nonumbers.map}}}
 \let\MetaPrefix\DoubleperCent
 \usepostamble\org@postamble
 \generate{\file{rapport1-xepersian.def}{\from{\jobname.dtx}{table,rapport1-xepersian.def}}}
@@ -3112,6 +3113,39 @@ U+003E U+003E <> U+00BB ; >> -> RIGHT POINTING GUILLEMET
 %    \end{macrocode}
 % \iffalse
 %</persian-tex-text.map>
+%<*persian-tex-text-nonumbers.map>
+%\fi
+% \section{File \texttt{persian-tex-text-nonumbers.map}}
+%    \begin{macrocode}
+LHSName "persian-TeX-text-nonumbers"
+RHSName "Unicode"
+
+pass(Unicode)
+U+002C <> U+060C ; comma ­> arabic comma
+U+003F <> U+061F ; question mark -> arabic qm
+U+003B <> U+061B ; semicolon -> arabic semicolon
+
+; ligatures from Knuth's original CMR fonts
+U+002D U+002D <> U+2013 ; -- -> en dash
+U+002D U+002D U+002D <> U+2014 ; --- -> em dash
+
+U+0027 <> U+2019 ; ' -> right single quote
+U+0027 U+0027 <> U+201D ; '' -> right double quote
+U+0022  > U+201D ; " -> right double quote
+
+U+0060 <> U+2018 ; ` -> left single quote
+U+0060 U+0060 <> U+201C ; `` -> left double quote
+
+U+0021 U+0060 <> U+00A1 ; !` -> inverted exclam
+U+003F U+0060 <> U+00BF ; ?` -> inverted question
+
+; additions supported in T1 encoding
+U+002C U+002C <> U+201E ; ,, -> DOUBLE LOW-9 QUOTATION MARK
+U+003C U+003C <> U+00AB ; << -> LEFT POINTING GUILLEMET
+U+003E U+003E <> U+00BB ; >> -> RIGHT POINTING GUILLEMET
+%    \end{macrocode}
+% \iffalse
+%</persian-tex-text-nonumbers.map>
 %<*rapport1-xepersian.def>
 %\fi
 % \section{File \texttt{rapport1-xepersian.def}}
@@ -3545,6 +3579,21 @@ Persian typesetting in XeLaTeX]
   Ligatures / PersianTeX .code:n =
    {
      \tl_set:Nn \l__fontspec_mapping_tl { persian-tex-text }
+   }
+ }
+ 
+\keys_define:nn {fontspec-opentype}
+  {
+    Ligatures / PersianTeXNoNumbers .code:n = { \tl_set:Nn \l__fontspec_mapping_tl {persian-tex-text-nonumbers} },
+    Ligatures / PersianTeXNoNumbersOff .code:n = { \tl_clear:N \l__fontspec_mapping_tl },
+    Ligatures / PersianTeXNoNumbersReset .code:n = { \tl_clear:N \l__fontspec_mapping_tl },
+  }
+
+\keys_define:nn {fontspec-aat}
+ {
+  Ligatures / PersianTeXNoNumbers .code:n =
+   {
+     \tl_set:Nn \l__fontspec_mapping_tl { persian-tex-text-nonumbers }
    }
  }
 
