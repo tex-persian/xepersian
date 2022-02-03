@@ -3604,7 +3604,7 @@ Persian typesetting in XeLaTeX]
   }
 \cs_new:Nn \__xepersian_main_settextfont:nn
  {
-  \fontspec_set_family:Nnn \l__xepersian_persianfont_family_tl {Script=Persian,Ligatures=PersianTeX,#1} {#2}
+  \fontspec_set_family:Nnn \l__xepersian_persianfont_family_tl {Ligatures=PersianTeX,#1} {#2}
   \tl_set_eq:NN \rmdefault \l__xepersian_persianfont_family_tl
   \use:x { \exp_not:n { \DeclareRobustCommand \persianfont }
    {
@@ -3628,7 +3628,7 @@ Persian typesetting in XeLaTeX]
   }
 \cs_new:Nn \__xepersian_main_settextdigitfont:nn
  {
-  \fontspec_set_family:Nnn \l__xepersian_textdigitfont_family_tl {Script=Persian,Ligatures=PersianTeX,#1} {#2}
+  \fontspec_set_family:Nnn \l__xepersian_textdigitfont_family_tl {Ligatures=PersianTeX,#1} {#2}
   \use:x
    {
     \exp_not:n { \DeclareRobustCommand \xepersian@textdigitfont }
@@ -3708,7 +3708,7 @@ Persian typesetting in XeLaTeX]
   }
 \cs_new:Nn \__xepersian_main_defpersianfont:NnnN
  {
-  \fontspec_set_family:cnn { l__xepersian_ \cs_to_str:N #1 _family_tl } {Script=Persian,Ligatures=PersianTeX,#2} {#3}
+  \fontspec_set_family:cnn { l__xepersian_ \cs_to_str:N #1 _family_tl } {Ligatures=PersianTeX,#2} {#3}
   \use:x
    {
     \exp_not:N #4 \exp_not:N #1 {}
@@ -3782,7 +3782,7 @@ Persian typesetting in XeLaTeX]
   }
 \cs_new:Nn \__xepersian_main_setpersiansansfont:nn
  {
-  \fontspec_set_family:Nnn \l__xepersian_persiansffamily_family_tl {Script=Persian,Ligatures=PersianTeX,#1} {#2}
+  \fontspec_set_family:Nnn \l__xepersian_persiansffamily_family_tl {Ligatures=PersianTeX,#1} {#2}
   \tl_set_eq:NN \persiansfdefault \l__xepersian_persiansffamily_family_tl
   \use:x { \exp_not:n { \DeclareRobustCommand \persiansffamily }
    {
@@ -3806,7 +3806,7 @@ Persian typesetting in XeLaTeX]
   }
 \cs_new:Nn \__xepersian_main_setpersianmonofont:nn
  {
-  \fontspec_set_family:Nnn \l__xepersian_persianttfamily_family_tl {Script=Persian,Ligatures=PersianTeX,#1} {#2}
+  \fontspec_set_family:Nnn \l__xepersian_persianttfamily_family_tl {Ligatures=PersianTeX,#1} {#2}
   \tl_set_eq:NN \persianttdefault \l__xepersian_persianttfamily_family_tl
   \use:x { \exp_not:n { \DeclareRobustCommand \persianttfamily }
    {
@@ -3830,7 +3830,7 @@ Persian typesetting in XeLaTeX]
   }
 \cs_new:Nn \__xepersian_main_setnavarfont:nn
  {
-  \fontspec_set_family:Nnn \l__xepersian_navarfamily_family_tl {Script=Persian,Ligatures=PersianTeX,#1} {#2}
+  \fontspec_set_family:Nnn \l__xepersian_navarfamily_family_tl {Ligatures=PersianTeX,#1} {#2}
   \tl_set_eq:NN \navardefault \l__xepersian_navarfamily_family_tl
   \use:x { \exp_not:n { \DeclareRobustCommand \navarfamily }
    {
@@ -3854,7 +3854,7 @@ Persian typesetting in XeLaTeX]
   }
 \cs_new:Nn \__xepersian_main_setpookfont:nn
  {
-  \fontspec_set_family:Nnn \l__xepersian_pookfamily_family_tl {Script=Persian,Ligatures=PersianTeX,#1} {#2}
+  \fontspec_set_family:Nnn \l__xepersian_pookfamily_family_tl {Ligatures=PersianTeX,#1} {#2}
   \tl_set_eq:NN \pookdefault \l__xepersian_pookfamily_family_tl
   \use:x { \exp_not:n { \DeclareRobustCommand \pookfamily }
    {
@@ -3878,7 +3878,7 @@ Persian typesetting in XeLaTeX]
   }
 \cs_new:Nn \__xepersian_main_setsayehfont:nn
  {
-  \fontspec_set_family:Nnn \l__xepersian_sayehfamily_family_tl {Script=Persian,Ligatures=PersianTeX,#1} {#2}
+  \fontspec_set_family:Nnn \l__xepersian_sayehfamily_family_tl {Ligatures=PersianTeX,#1} {#2}
   \tl_set_eq:NN \sayehdefault \l__xepersian_sayehfamily_family_tl
   \use:x { \exp_not:n { \DeclareRobustCommand \sayehfamily }
    {
@@ -3902,7 +3902,7 @@ Persian typesetting in XeLaTeX]
   }
 \cs_new:Nn \__xepersian_main_setiranicfont:nn
  {
-  \fontspec_set_family:Nnn \l__xepersian_iranicfamily_family_tl {Script=Persian,Ligatures=PersianTeX,#1} {#2}
+  \fontspec_set_family:Nnn \l__xepersian_iranicfamily_family_tl {Ligatures=PersianTeX,#1} {#2}
   \tl_set_eq:NN \iranicdefault \l__xepersian_iranicfamily_family_tl
   \use:x { \exp_not:n { \DeclareRobustCommand \iranicfamily }
    {
