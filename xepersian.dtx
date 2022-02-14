@@ -119,6 +119,7 @@ by Vafa Khalighi.
 \generate{\file{latex-localise-misc-xepersian.def}{\from{\jobname.dtx}{table,latex-localise-misc-xepersian.def}}}
 \generate{\file{natbib-xepersian.def}{\from{\jobname.dtx}{table,natbib-xepersian.def}}}
 \generate{\file{packages-localise-xepersian.def}{\from{\jobname.dtx}{table,packages-localise-xepersian.def}}}
+\generate{\file{url-xepersian.def}{\from{\jobname.dtx}{table,url-xepersian.def}}}
 \def\MetaPrefix{;;}
 \def\mapping@postamble{%
   \MetaPrefix ^^J%
@@ -246,7 +247,7 @@ by Vafa Khalighi.
 %\iffalse
 %<*table>
 %\fi
-%% \CheckSum{10959}
+%% \CheckSum{10981}
 %% \CharacterTable
 %%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
 %%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
@@ -3068,6 +3069,19 @@ by Vafa Khalighi.
 %    \end{macrocode}
 % \iffalse
 %</packages-localise-xepersian.def>
+%<*url-xepersian.def>
+%\fi
+% \section{File \texttt{url-xepersian.def}}
+%    \begin{macrocode}
+\ProvidesFile{url-xepersian.def}[2022/02/14 v0.1 adaptations for url package]
+\begingroup
+ \lccode`+=`\% \lccode`\~=`\%
+  \lowercase {\long\gdef\Url@actpercent{\Url@Edit\Url@String{+}{~}%
+    \ifnum\Umathcodenum`\%<32768 \def~{\%}\fi}}%
+\endgroup%
+%    \end{macrocode}
+% \iffalse
+%</url-xepersian.def>
 %<*persian-tex-text.map>
 %\fi
 % \section{File \texttt{persian-tex-text.map}}
@@ -4663,6 +4677,7 @@ number is 999,999,999.}%
 \@ifpackageloaded{tikz}{\input{tikz.code-xepersian.def}}{}
 \@ifpackageloaded{tkz-linknodes}{\input{tkz-linknodes-xepersian.def}}{}
 \@ifpackageloaded{tocloft}{\@ifclassloaded{memoir}{}{\input{tocloft-xepersian.def}}}{}
+\@ifpackageloaded{url}{\input{url-xepersian.def}}{}
 \@ifpackageloaded{varioref}{\input{varioref-xepersian.def}}{}
 \@ifclassloaded{article}{\input{article-xepersian.def}}{}
 \@ifclassloaded{extarticle}{\input{extarticle-xepersian.def}}{}
