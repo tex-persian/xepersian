@@ -246,7 +246,7 @@ by Vafa Khalighi.
 %\iffalse
 %<*table>
 %\fi
-%% \CheckSum{10972}
+%% \CheckSum{10978}
 %% \CharacterTable
 %%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
 %%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
@@ -3656,8 +3656,8 @@ Persian typesetting in XeLaTeX]
    }
  }
  
-\newcommand*{\xepersian@@start@switch@textdigitfont}{\ifx\f@family\ttdefault\else\if@nonlatin\if@@textdigitfont@on\xepersian@textdigitfont\else\fi\fi\fi}
-\newcommand*{\xepersian@@stop@switch@textdigitfont}{\ifx\f@family\ttdefault\else\if@nonlatin\if@@textdigitfont@on\persianfont\else\fi\fi\fi} 
+\newcommand*{\xepersian@@start@switch@textdigitfont}{\ifx\f@family\ttdefault\else\if@nonlatin\if@@textdigitfont@on\let\xepersian@save@@f@family\f@family\xepersian@textdigitfont\else\fi\fi\fi}
+\newcommand*{\xepersian@@stop@switch@textdigitfont}{\ifx\f@family\ttdefault\else\if@nonlatin\if@@textdigitfont@on\let\f@family\xepersian@save@@f@family\selectfont\else\fi\fi\fi} 
  
 \cs_set_eq:NN \__xepersian_settextdigitfont_hook:nn   \use_none:nn
  
