@@ -138,7 +138,6 @@ by Vafa Khalighi.
 \generate{\file{scrbook-xepersian.def}{\from{\jobname.dtx}{table,scrbook-xepersian.def}}}
 \generate{\file{scrreprt-xepersian.def}{\from{\jobname.dtx}{table,scrreprt-xepersian.def}}}
 \generate{\file{soul-xepersian.def}{\from{\jobname.dtx}{table,soul-xepersian.def}}}
-\generate{\file{tikz.code-xepersian.def}{\from{\jobname.dtx}{table,tikz.code-xepersian.def}}}
 \generate{\file{tkz-linknodes-xepersian.def}{\from{\jobname.dtx}{table,tkz-linknodes-xepersian.def}}}
 \generate{\file{tocloft-xepersian.def}{\from{\jobname.dtx}{table,tocloft-xepersian.def}}}
 \generate{\file{varioref-xepersian.def}{\from{\jobname.dtx}{table,varioref-xepersian.def}}}
@@ -247,7 +246,7 @@ by Vafa Khalighi.
 %\iffalse
 %<*table>
 %\fi
-%% \CheckSum{10981}
+%% \CheckSum{10972}
 %% \CharacterTable
 %%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
 %%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
@@ -3357,20 +3356,6 @@ U+003E U+003E <> U+00BB ; >> -> RIGHT POINTING GUILLEMET
 %    \end{macrocode}
 % \iffalse
 %</soul-xepersian.def>
-%<*tikz.code-xepersian.def>
-%\fi
-% \section{File \texttt{tikz.code-xepersian.def}}
-%    \begin{macrocode}
-\ProvidesFile{tikz.code-xepersian.def}[2020/05/17 v0.2 adaptations for tikz.code.tex file]
-\bidi@patchcmd\tikz@finish{%
-  \tikz@preactions%
-}{%
-  \@@textdigitfont@onfalse%
-  \tikz@preactions%
-}{}{}
-%    \end{macrocode}
-% \iffalse
-%</tikz.code-xepersian.def>
 %<*tkz-linknodes-xepersian.def>
 %\fi
 % \section{File \texttt{tkz-linknodes-xepersian.def}}
@@ -3671,8 +3656,8 @@ Persian typesetting in XeLaTeX]
    }
  }
  
-\newcommand*{\xepersian@@start@switch@textdigitfont}{\ifx\f@family\ttdefault\else\if@nonlatin\if@@textdigitfont@on\bgroup\xepersian@textdigitfont\else\fi\fi\fi}
-\newcommand*{\xepersian@@stop@switch@textdigitfont}{\ifx\f@family\ttdefault\else\if@nonlatin\if@@textdigitfont@on\egroup\else\fi\fi\fi} 
+\newcommand*{\xepersian@@start@switch@textdigitfont}{\ifx\f@family\ttdefault\else\if@nonlatin\if@@textdigitfont@on\xepersian@textdigitfont\else\fi\fi\fi}
+\newcommand*{\xepersian@@stop@switch@textdigitfont}{\ifx\f@family\ttdefault\else\if@nonlatin\if@@textdigitfont@on\persianfont\else\fi\fi\fi} 
  
 \cs_set_eq:NN \__xepersian_settextdigitfont_hook:nn   \use_none:nn
  
@@ -4674,7 +4659,6 @@ number is 999,999,999.}%
 \@ifpackageloaded{minitoc}{\input{minitoc-xepersian.def}}{}
 \@ifpackageloaded{natbib}{\input{natbib-xepersian.def}}{}
 \@ifpackageloaded{soul}{\input{soul-xepersian.def}}{}
-\@ifpackageloaded{tikz}{\input{tikz.code-xepersian.def}}{}
 \@ifpackageloaded{tkz-linknodes}{\input{tkz-linknodes-xepersian.def}}{}
 \@ifpackageloaded{tocloft}{\@ifclassloaded{memoir}{}{\input{tocloft-xepersian.def}}}{}
 \@ifpackageloaded{url}{\input{url-xepersian.def}}{}
