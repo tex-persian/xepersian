@@ -5,7 +5,7 @@
 %<*readme>
 ____________________
 The XePersian package
-v23.5
+v23.6
 
 The xepersian package provides a convenient interface for 
 typesetting Persian and English texts in LaTeX, using XeTeX 
@@ -168,7 +168,7 @@ by Vafa Khalighi.
 \documentclass{ltxdoc}
 \input{xepersian-doc-preamble.ltx}
 \hypersetup{%
-  pdftitle={Source documentation for version 23.5 of the XePersian
+  pdftitle={Source documentation for version 23.6 of the XePersian
                 package}%
 }
 \EnableCrossrefs
@@ -187,7 +187,7 @@ by Vafa Khalighi.
 % \GetFileInfo{\jobname.dtx}
 % \title{\textcolor{blue!65!black}{\Huge The \textsf{\XePersian} \textit{Package}}\\
 %\LARGE Persian for \LaTeXe, using {\XeTeX} engine\\[5pt]
-%\large Source documentation for \textcolor{blue!65!black}{version 23.5}}
+%\large Source documentation for \textcolor{blue!65!black}{version 23.6}}
 % \author{Vafa Khalighi\thanks{Thanks to the bidi-tex GitHub organization consisted of David Carlisle and other members of the  {\LaTeX} team to maintain the package in the period 2018--2020.}\\
 %  \url{tex-persian@vafa.ac}}
 %\setcounter{page}{0}
@@ -198,7 +198,7 @@ by Vafa Khalighi.
 %\textcolor{blue!65!black}{\Huge The \textsf{\XePersian} \textit{Package}}
 %
 %\Large
-%Source documentation for \textcolor{blue!65!black}{version 23.5}}
+%Source documentation for \textcolor{blue!65!black}{version 23.6}}
 %
 %\vskip 0pt plus 3fill
 %\textit{\large to my Master, \textbf{Ferdowsi The Great}}
@@ -3477,7 +3477,7 @@ U+003E U+003E <> U+00BB ; >> -> RIGHT POINTING GUILLEMET
 % \section{File \texttt{xepersian.sty}}
 %    \begin{macrocode}
 \NeedsTeXFormat{LaTeX2e}
-\def\xepersian@version{23.5}
+\def\xepersian@version{23.6}
 \def\xepersiandate{2022/02/20}
 \ProvidesPackage{xepersian}[\xepersiandate\space v\xepersian@version\space 
 Persian typesetting in XeLaTeX]
@@ -3739,13 +3739,13 @@ Persian typesetting in XeLaTeX]
     \bool_if:NTF \l__fontspec_ot_bool
       {
         \keys_set:nV {fontspec-opentype} \l__fontspec_keys_leftover_clist
-        \__fontspec_update_featstr:n { script = arab }
       }
       {
         \bool_if:nT { \l__fontspec_atsui_bool || \l__fontspec_graphite_bool }
           { \keys_set:nV {fontspec-aat} \l__fontspec_keys_leftover_clist }
       }
-
+    \__fontspec_update_featstr:n { script = arab }
+    
     \tl_if_empty:NF \l__fontspec_mapping_tl
       { \__fontspec_update_featstr:n { mapping = \l__fontspec_mapping_tl } }
 
