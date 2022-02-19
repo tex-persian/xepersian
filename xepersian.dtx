@@ -5,7 +5,7 @@
 %<*readme>
 ____________________
 The XePersian package
-v23.4
+v23.5
 
 The xepersian package provides a convenient interface for 
 typesetting Persian and English texts in LaTeX, using XeTeX 
@@ -31,7 +31,7 @@ also appear in the Discussions space under the Announcements
 category.
   
   
-Current version release date: 2022/02/18
+Current version release date: 2022/02/20
 ___________________________________________
 Vafa Khalighi
 tex-persian@vafa.ac
@@ -168,7 +168,7 @@ by Vafa Khalighi.
 \documentclass{ltxdoc}
 \input{xepersian-doc-preamble.ltx}
 \hypersetup{%
-  pdftitle={Source documentation for version 23.4 of the XePersian
+  pdftitle={Source documentation for version 23.5 of the XePersian
                 package}%
 }
 \EnableCrossrefs
@@ -187,7 +187,7 @@ by Vafa Khalighi.
 % \GetFileInfo{\jobname.dtx}
 % \title{\textcolor{blue!65!black}{\Huge The \textsf{\XePersian} \textit{Package}}\\
 %\LARGE Persian for \LaTeXe, using {\XeTeX} engine\\[5pt]
-%\large Source documentation for \textcolor{blue!65!black}{version 23.4}}
+%\large Source documentation for \textcolor{blue!65!black}{version 23.5}}
 % \author{Vafa Khalighi\thanks{Thanks to the bidi-tex GitHub organization consisted of David Carlisle and other members of the  {\LaTeX} team to maintain the package in the period 2018--2020.}\\
 %  \url{tex-persian@vafa.ac}}
 %\setcounter{page}{0}
@@ -198,7 +198,7 @@ by Vafa Khalighi.
 %\textcolor{blue!65!black}{\Huge The \textsf{\XePersian} \textit{Package}}
 %
 %\Large
-%Source documentation for \textcolor{blue!65!black}{version 23.4}}
+%Source documentation for \textcolor{blue!65!black}{version 23.5}}
 %
 %\vskip 0pt plus 3fill
 %\textit{\large to my Master, \textbf{Ferdowsi The Great}}
@@ -246,7 +246,7 @@ by Vafa Khalighi.
 %\iffalse
 %<*table>
 %\fi
-%% \CheckSum{10978}
+%% \CheckSum{11214}
 %% \CharacterTable
 %%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
 %%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
@@ -3477,8 +3477,8 @@ U+003E U+003E <> U+00BB ; >> -> RIGHT POINTING GUILLEMET
 % \section{File \texttt{xepersian.sty}}
 %    \begin{macrocode}
 \NeedsTeXFormat{LaTeX2e}
-\def\xepersian@version{23.4}
-\def\xepersiandate{2022/02/18}
+\def\xepersian@version{23.5}
+\def\xepersiandate{2022/02/20}
 \ProvidesPackage{xepersian}[\xepersiandate\space v\xepersian@version\space 
 Persian typesetting in XeLaTeX]
 \RequirePackage{fontspec}
@@ -3566,6 +3566,194 @@ Persian typesetting in XeLaTeX]
 \newfontlanguage{Persian}{FAR}
 \ExplSyntaxOn
 
+\cs_new:Nn \xepersian_set_family:Nnn  { \__xepersian_set_family:NnnN #1 {#2} {#3} \tl_set_eq:NN  }
+\cs_generate_variant:Nn \xepersian_set_family:Nnn {c}
+
+\cs_new_protected:Nn \__xepersian_select_font_family:nn
+  {
+    \group_begin:
+    \__fontspec_font_suppress_not_found_error:
+    \__fontspec_init:
+
+    \__fontspec_sanitise_fontname:Nn \l_fontspec_fontname_tl    {#2}
+    \__fontspec_sanitise_fontname:Nn \l__fontspec_fontname_up_tl       {#2}
+    \__fontspec_sanitise_fontname:Nn \l__fontspec_basename_tl          {#2}
+
+    \__fontspec_if_detect_external:nT {#2}
+     { \keys_set:nn {fontspec-preparse-external} {Path} }
+
+    \keys_set_known:nn {fontspec-preparse-cfg} {#1}
+
+    \__fontspec_init_ttc:n {#2}
+    \__fontspec_load_external_fontoptions:N \l_fontspec_fontname_tl
+
+    \__fontspec_extract_all_features:n {#1}
+    \tl_set:Nx \l__fontspec_fontid_tl { \tl_to_str:N \l_fontspec_fontname_tl-:-\tl_to_str:N \l__fontspec_all_features_clist }
+
+
+    \__fontspec_preparse_features:
+    \__fontspec_load_font:
+    \__fontspec_set_scriptlang:
+    \__xepersian_get_features:n {}
+    \bool_set_false:N \l__fontspec_firsttime_bool
+
+    \__fontspec_save_family_needed:nTF {#2}
+      {
+        \__xepersian_save_family:nn {#1} {#2}
+      }
+      {
+      }
+    \group_end:
+
+    \tl_set_eq:NN \l_fontspec_family_tl \g__fontspec_nfss_family_tl
+  }
+  
+\cs_new:Nn \__xepersian_set_family:NnnN
+  {
+    \tl_set:Nn \l__fontspec_fontface_cs_tl {\l_fontspec_font} % reset
+    \tl_set:Nn \l__fontspec_family_label_tl {#1}
+    \__xepersian_select_font_family:nn {#2} {#3}
+    \__fontspec_tl_new_if_free:N #1
+    #4 #1 \l_fontspec_family_tl
+    \tl_set:Nn \l__fontspec_fontface_cs_tl {\l_fontspec_font} % reset
+  }
+
+\cs_new:Nn \__xepersian_setup_nfss:Nnnn
+  {
+
+    \__xepersian_get_features:n { #2 , #3 , #4 }
+
+    \tl_if_empty:NF \l__fontspec_scale_tl
+      {
+        \tl_set:Nx \l__fontspec_scale_tl { s*[\l__fontspec_scale_tl] }
+      }
+
+    \tl_build_put_right:Nx #1
+      {
+        <\l__fontspec_size_tl> \l__fontspec_scale_tl
+        \__fontspec_construct_font_call:nn { \l_fontspec_fontname_tl }
+          { \l__fontspec_pre_feat_sclist \g__fontspec_rawfeatures_sclist }
+      }
+  }
+
+\cs_new:Nn \__xepersian_setup_single_size:nn
+  {
+    \tl_clear:N \l__fontspec_size_tl
+    \tl_set_eq:NN \l__fontspec_sizedfont_tl \l__fontspec_saved_fontname_tl % in case not spec'ed
+
+    \keys_set_known:nxN {fontspec-sizing} { \exp_after:wN \use:n #2 }
+      \l__fontspec_sizing_leftover_clist
+    \tl_if_empty:NT \l__fontspec_size_tl { \__fontspec_error:n {no-size-info} }
+
+    % "normal"
+    \__fontspec_load_fontname:Nn \l_fontspec_fontname_tl {\l__fontspec_sizedfont_tl}
+    \__xepersian_setup_nfss:Nnnn \l__fontspec_nfss_tl {#1} {\l__fontspec_sizing_leftover_clist} {}
+
+    % small caps
+    \clist_set_eq:NN \l__fontspec_fontfeat_curr_clist \l__fontspec_fontfeat_sc_clist
+
+    \bool_if:NF \l__fontspec_nosc_bool
+      {
+        \tl_if_empty:NTF \l__fontspec_fontname_sc_tl
+          {
+            \__fontspec_make_smallcaps:TF
+              {
+                \clist_put_left:Nn \l__fontspec_fontfeat_curr_clist {Letters=SmallCaps}
+              }
+              {
+                \bool_set_true:N \l__fontspec_nosc_bool
+              }
+          }
+          { \__fontspec_load_fontname:Nn \l_fontspec_fontname_tl {\l__fontspec_fontname_sc_tl} }% local for each size
+      }
+
+    \bool_if:NF \l__fontspec_nosc_bool
+      {
+        \__fontspec_setup_nfss:Nnnn \l__fontspec_nfss_sc_tl
+          {#1} {\l__fontspec_sizing_leftover_clist} {\l__fontspec_fontfeat_curr_clist}
+      }
+  }
+  
+\cs_new:Nn \__xepersian_declare_shape:nnnn
+  {
+    \tl_build_begin:N \l__fontspec_nfss_tl
+    \tl_build_begin:N \l__fontspec_nfss_sc_tl
+    \tl_set_eq:NN \l__fontspec_saved_fontname_tl \l_fontspec_fontname_tl
+
+    \exp_args:Nx \clist_map_inline:nn {#4} { \__xepersian_setup_single_size:nn {#3} {##1} }
+
+    \tl_build_end:N \l__fontspec_nfss_tl
+    \tl_build_end:N \l__fontspec_nfss_sc_tl
+
+    \__fontspec_declare_shapes_normal:nn {#1} {#2}
+    \__fontspec_declare_shapes_smcaps:nn {#1} {#2}
+    \__fontspec_declare_shape_slanted:nn {#1} {#2}
+    \__fontspec_declare_shapes_bx:nn     {#1} {#2}
+    \__fontspec_declare_shape_loginfo:nn {#1} {#2}
+  }
+\cs_generate_variant:Nn \__xepersian_declare_shape:nnnn {nnxx}
+
+\cs_new:Nn \__xepersian_make_font_shapes:Nnnnn
+  {
+    \group_begin:
+      \__fontspec_keys_set_known:nxN {fontspec-preparse-external} { #4 } \l__fontspec_leftover_clist
+      \__fontspec_load_fontname:Nn \l_fontspec_fontname_tl {#1}
+      \__xepersian_declare_shape:nnxx {#2} {#3} { \l__fontspec_fontopts_clist, \l__fontspec_leftover_clist } {#5}
+    \group_end:
+  }
+
+\cs_new:Nn \__xepersian_set_faces_aux:nnnnn
+  {
+    \fontspec_complete_fontname:Nn \l__fontspec_curr_fontname_tl {#3}
+    \__xepersian_make_font_shapes:Nnnnn \l__fontspec_curr_fontname_tl {#1} {#2} {#4} {#5}
+  }
+
+\cs_new:Nn \__xepersian_set_faces:
+  {
+    \__fontspec_add_nfssfont:nnnn \mddefault \shapedefault \l_fontspec_fontname_tl \l__fontspec_fontfeat_up_clist
+    \__fontspec_add_nfssfont:nnnn \bfdefault \shapedefault \l__fontspec_fontname_bf_tl    \l__fontspec_fontfeat_bf_clist
+    \__fontspec_add_nfssfont:nnnn \mddefault \itdefault    \l__fontspec_fontname_it_tl    \l__fontspec_fontfeat_it_clist
+    \__fontspec_add_nfssfont:nnnn \mddefault \sldefault    \l__fontspec_fontname_sl_tl    \l__fontspec_fontfeat_sl_clist
+    \__fontspec_add_nfssfont:nnnn \mddefault \swdefault    \l__fontspec_fontname_sw_tl    \l__fontspec_fontfeat_sw_clist
+    \__fontspec_add_nfssfont:nnnn \bfdefault \itdefault    \l__fontspec_fontname_bfit_tl  \l__fontspec_fontfeat_bfit_clist
+    \__fontspec_add_nfssfont:nnnn \bfdefault \sldefault    \l__fontspec_fontname_bfsl_tl  \l__fontspec_fontfeat_bfsl_clist
+    \__fontspec_add_nfssfont:nnnn \bfdefault \swdefault    \l__fontspec_fontname_bfsw_tl  \l__fontspec_fontfeat_bfsw_clist
+    \prop_map_inline:Nn \l__fontspec_nfssfont_prop { \__xepersian_set_faces_aux:nnnnn ##2 }
+  }
+  
+\cs_new:Nn \__xepersian_save_family:nn
+  {
+    \__fontspec_save_fontinfo:n {#2}
+    \__fontspec_find_autofonts:
+    \DeclareFontFamily{\g__fontspec_nfss_enc_tl}{\g__fontspec_nfss_family_tl}{}
+    \__xepersian_set_faces:
+    \__fontspec_info:nxx {defining-font} {#1} {#2}
+  }
+  
+\cs_new:Nn \__xepersian_get_features:n
+  {
+    \__fontspec_init_fontface:
+    \__fontspec_keys_set_known:nxN {fontspec-renderer} {\l__fontspec_fontfeat_clist,#1}
+      \l__fontspec_keys_leftover_clist
+    \__fontspec_keys_set_known:nxN {fontspec} {\l__fontspec_keys_leftover_clist} \l__fontspec_keys_leftover_clist
+    \bool_if:NTF \l__fontspec_ot_bool
+      {
+        \keys_set:nV {fontspec-opentype} \l__fontspec_keys_leftover_clist
+        \__fontspec_update_featstr:n { script = arab }
+      }
+      {
+        \bool_if:nT { \l__fontspec_atsui_bool || \l__fontspec_graphite_bool }
+          { \keys_set:nV {fontspec-aat} \l__fontspec_keys_leftover_clist }
+      }
+
+    \tl_if_empty:NF \l__fontspec_mapping_tl
+      { \__fontspec_update_featstr:n { mapping = \l__fontspec_mapping_tl } }
+
+    \str_if_eq:eeF { \l__fontspec_hexcol_tl \l__fontspec_opacity_tl }
+                     { \c__fontspec_hexcol_tl \c__fontspec_opacity_tl }
+      { \__fontspec_update_featstr:n { color = \l__fontspec_hexcol_tl\l__fontspec_opacity_tl } }
+  }
+
 \keys_define:nn {fontspec-opentype}
   {
     Ligatures / PersianTeX .code:n = { \tl_set:Nn \l__fontspec_mapping_tl {persian-tex-text} },
@@ -3603,7 +3791,7 @@ Persian typesetting in XeLaTeX]
   }
 \cs_new:Nn \__xepersian_main_settextfont:nn
  {
-  \fontspec_set_family:Nnn \l__xepersian_persianfont_family_tl {Ligatures=PersianTeX,#1} {#2}
+  \xepersian_set_family:Nnn \l__xepersian_persianfont_family_tl {Ligatures=PersianTeX,#1} {#2}
   \tl_set_eq:NN \rmdefault \l__xepersian_persianfont_family_tl
   \use:x { \exp_not:n { \DeclareRobustCommand \persianfont }
    {
@@ -3707,7 +3895,7 @@ Persian typesetting in XeLaTeX]
   }
 \cs_new:Nn \__xepersian_main_defpersianfont:NnnN
  {
-  \fontspec_set_family:cnn { l__xepersian_ \cs_to_str:N #1 _family_tl } {Ligatures=PersianTeX,#2} {#3}
+  \xepersian_set_family:cnn { l__xepersian_ \cs_to_str:N #1 _family_tl } {Ligatures=PersianTeX,#2} {#3}
   \use:x
    {
     \exp_not:N #4 \exp_not:N #1 {}
@@ -3781,7 +3969,7 @@ Persian typesetting in XeLaTeX]
   }
 \cs_new:Nn \__xepersian_main_setpersiansansfont:nn
  {
-  \fontspec_set_family:Nnn \l__xepersian_persiansffamily_family_tl {Ligatures=PersianTeX,#1} {#2}
+  \xepersian_set_family:Nnn \l__xepersian_persiansffamily_family_tl {Ligatures=PersianTeX,#1} {#2}
   \tl_set_eq:NN \persiansfdefault \l__xepersian_persiansffamily_family_tl
   \use:x { \exp_not:n { \DeclareRobustCommand \persiansffamily }
    {
@@ -3805,7 +3993,7 @@ Persian typesetting in XeLaTeX]
   }
 \cs_new:Nn \__xepersian_main_setpersianmonofont:nn
  {
-  \fontspec_set_family:Nnn \l__xepersian_persianttfamily_family_tl {Ligatures=PersianTeX,#1} {#2}
+  \xepersian_set_family:Nnn \l__xepersian_persianttfamily_family_tl {Ligatures=PersianTeX,#1} {#2}
   \tl_set_eq:NN \persianttdefault \l__xepersian_persianttfamily_family_tl
   \use:x { \exp_not:n { \DeclareRobustCommand \persianttfamily }
    {
@@ -3829,7 +4017,7 @@ Persian typesetting in XeLaTeX]
   }
 \cs_new:Nn \__xepersian_main_setnavarfont:nn
  {
-  \fontspec_set_family:Nnn \l__xepersian_navarfamily_family_tl {Ligatures=PersianTeX,#1} {#2}
+  \xepersian_set_family:Nnn \l__xepersian_navarfamily_family_tl {Ligatures=PersianTeX,#1} {#2}
   \tl_set_eq:NN \navardefault \l__xepersian_navarfamily_family_tl
   \use:x { \exp_not:n { \DeclareRobustCommand \navarfamily }
    {
@@ -3853,7 +4041,7 @@ Persian typesetting in XeLaTeX]
   }
 \cs_new:Nn \__xepersian_main_setpookfont:nn
  {
-  \fontspec_set_family:Nnn \l__xepersian_pookfamily_family_tl {Ligatures=PersianTeX,#1} {#2}
+  \xepersian_set_family:Nnn \l__xepersian_pookfamily_family_tl {Ligatures=PersianTeX,#1} {#2}
   \tl_set_eq:NN \pookdefault \l__xepersian_pookfamily_family_tl
   \use:x { \exp_not:n { \DeclareRobustCommand \pookfamily }
    {
@@ -3877,7 +4065,7 @@ Persian typesetting in XeLaTeX]
   }
 \cs_new:Nn \__xepersian_main_setsayehfont:nn
  {
-  \fontspec_set_family:Nnn \l__xepersian_sayehfamily_family_tl {Ligatures=PersianTeX,#1} {#2}
+  \xepersian_set_family:Nnn \l__xepersian_sayehfamily_family_tl {Ligatures=PersianTeX,#1} {#2}
   \tl_set_eq:NN \sayehdefault \l__xepersian_sayehfamily_family_tl
   \use:x { \exp_not:n { \DeclareRobustCommand \sayehfamily }
    {
@@ -3901,7 +4089,7 @@ Persian typesetting in XeLaTeX]
   }
 \cs_new:Nn \__xepersian_main_setiranicfont:nn
  {
-  \fontspec_set_family:Nnn \l__xepersian_iranicfamily_family_tl {Ligatures=PersianTeX,#1} {#2}
+  \xepersian_set_family:Nnn \l__xepersian_iranicfamily_family_tl {Ligatures=PersianTeX,#1} {#2}
   \tl_set_eq:NN \iranicdefault \l__xepersian_iranicfamily_family_tl
   \use:x { \exp_not:n { \DeclareRobustCommand \iranicfamily }
    {
@@ -4329,7 +4517,7 @@ Persian typesetting in XeLaTeX]
 
 \newcommand*{\@xepersian@pdfcustomproperties}{%
   This is the xepersian package, Version \xepersian@version,
-  Released February 18, 2022. 
+  Released February 20, 2022. 
 }
 
 \newcommand\twocolumnstableofcontents{%
